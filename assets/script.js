@@ -46,7 +46,28 @@
 //     console.log(inputValue)
 // }
 
+var searchbodyEl = document.querySelector("#searchbody");
+var cityEl = document.querySelector("#city");
 
+searchbodyEl.addEventListener("submit", formSubmitHandler);
+
+
+//submit handler
+var formSubmitHandler = function(event) {
+    event.preventDefault();
+    var city = cityEl.value.trim();
+        if (city) {
+            getcoords(city);
+            cityEl.value= "";
+        }
+        else {
+            alert("Please enter a valid US city");
+        }
+    console.log(event);
+};
+
+
+//fetch coordinates
 var getcoords = function(city) {
     var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6c6a2773e4ad1859b9bab1adec8ab957";
 
@@ -57,5 +78,6 @@ var getcoords = function(city) {
         });
     });
 };
+getcoords(" ");
 
-getcoords("London");
+
