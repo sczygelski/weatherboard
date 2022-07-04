@@ -66,18 +66,21 @@ var formSubmitHandler = function(event) {
     console.log(event);
 };
 
-
 //fetch coordinates
 var getcoords = function(city) {
-    var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ",USA&limit=5&appid=6c6a2773e4ad1859b9bab1adec8ab957";
+    var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ",USA&limit=1&appid=6c6a2773e4ad1859b9bab1adec8ab957";
 
     fetch(apiURL).then(function(response) {
         console.log(response);
         response.json().then(function(data) {
-            console.log(data);
+            var lat =  data[0].lat;
+            var lon = data[0].lon;
+            console.log(lat);
+            })
         });
-    });
+    
 };
 getcoords("city");
 
 searchbodyEl.addEventListener("submit", formSubmitHandler);
+
