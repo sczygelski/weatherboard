@@ -70,17 +70,43 @@ var formSubmitHandler = function(event) {
 var getcoords = function(city) {
     var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ",USA&limit=1&appid=6c6a2773e4ad1859b9bab1adec8ab957";
 
+
     fetch(apiURL).then(function(response) {
         console.log(response);
         response.json().then(function(data) {
             var lat =  data[0].lat;
             var lon = data[0].lon;
-            console.log(lat);
+            console.log(lon);
+
+            var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,current,alerts&appid=6c6a2773e4ad1859b9bab1adec8ab957";
+            
+            fetch (weatherapiURL).then(function(response) {
+                console.log(response);
+                response.json().then(function(data) {
+                    console.log(data);
+                })
+            });  
             })
-        });
-    
+        }); 
+
+ 
+
+  
 };
 getcoords("city");
 
 searchbodyEl.addEventListener("submit", formSubmitHandler);
 
+//fetch weather
+// var getweather = function() {
+
+//     var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,current,alerts&appid=6c6a2773e4ad1859b9bab1adec8ab957"
+
+//     fetch (weatherapiURL).then(function(response) {
+//         console.log(response);
+//         response.json().then(function(data) {
+//             console.log(data);
+//         })
+//     })
+// }
+// getweather();   
