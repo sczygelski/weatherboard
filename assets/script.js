@@ -49,7 +49,7 @@
 var searchbodyEl = document.querySelector("#searchbody");
 var cityEl = document.querySelector("#city");
 
-searchbodyEl.addEventListener("submit", formSubmitHandler);
+
 
 
 //submit handler
@@ -58,7 +58,7 @@ var formSubmitHandler = function(event) {
     var city = cityEl.value.trim();
         if (city) {
             getcoords(city);
-            cityEl.value= "";
+            cityEl.value= " ";
         }
         else {
             alert("Please enter a valid US city");
@@ -69,7 +69,7 @@ var formSubmitHandler = function(event) {
 
 //fetch coordinates
 var getcoords = function(city) {
-    var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=6c6a2773e4ad1859b9bab1adec8ab957";
+    var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ",USA&limit=5&appid=6c6a2773e4ad1859b9bab1adec8ab957";
 
     fetch(apiURL).then(function(response) {
         console.log(response);
@@ -78,6 +78,6 @@ var getcoords = function(city) {
         });
     });
 };
-getcoords(" ");
+getcoords("city");
 
-
+searchbodyEl.addEventListener("submit", formSubmitHandler);
