@@ -18,7 +18,6 @@ var formSubmitHandler = function(event) {
         else {
             alert("Please enter a valid US city"); 
         }
-    console.log(event);
 };
 
 
@@ -35,9 +34,8 @@ var getcoords = function(city) {
             var name = document.querySelector("#citytitle")
             name.innerHTML = data[0].name + ", " + data[0].state;
             
-            
-            var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=6c6a2773e4ad1859b9bab1adec8ab957";
-            
+            //fetch weather from coordinates
+            var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=6c6a2773e4ad1859b9bab1adec8ab957";           
             fetch (weatherapiURL).then(function(response) {
                 console.log(response);
                 response.json().then(function(data) {
@@ -47,7 +45,6 @@ var getcoords = function(city) {
                     document.querySelector("#header").innerHTML = (humidity);
                     for (let i = 1; i < 6; i++) {
                         var card = document.createElement("div")
-                        var date = document.createElement("h4")
                         var icon = document.createElement("p")
                         var temp = document.createElement("p")
                         var wind = document.createElement("p")
@@ -55,7 +52,10 @@ var getcoords = function(city) {
 
                         temp.innerHTML = data.daily[i].temp.max
                         card.appendChild(temp)
-                        // document.querySelector("")
+                        wind.innerHTML = data.daily[i].wind_speed
+                        card.appendChild(wind)
+                        humid.innerHTML = data.daily[i].humidity
+                        card.appendChild(humid)                        
 
 
                         // test.innerHTML = "taco"
