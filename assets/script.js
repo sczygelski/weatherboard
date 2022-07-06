@@ -32,7 +32,8 @@ var getcoords = function(city) {
             var lat =  data[0].lat;
             var lon = data[0].lon;
             var name = document.querySelector("#citytitle")
-            name.innerHTML = data[0].name + ", " + data[0].state;
+            var curdate = moment().format('YYYY-MM-DD')
+            name.innerHTML = data[0].name + ", " + data[0].state + ":      " + curdate;
             
             //fetch weather from coordinates
             var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=6c6a2773e4ad1859b9bab1adec8ab957";           
@@ -42,7 +43,7 @@ var getcoords = function(city) {
                     console.log(data);
 
                     //for current day
-
+                    
                     var temperature = data.daily[0].temp.max
                     document.querySelector("#temperature").innerHTML = "Temperature: " + temperature + " Kelvin"
                     var gusty = data.daily[0].wind_speed
