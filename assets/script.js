@@ -27,7 +27,6 @@ var getcoords = function(city) {
     
     
     fetch(apiURL).then(function(response) {
-        console.log(response);
         response.json().then(function(data) {
             var lat =  data[0].lat;
             var lon = data[0].lon;
@@ -38,12 +37,9 @@ var getcoords = function(city) {
             //fetch weather from coordinates
             var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=6c6a2773e4ad1859b9bab1adec8ab957";           
             fetch (weatherapiURL).then(function(response) {
-                console.log(response);
                 response.json().then(function(data) {
-                    console.log(data);
 
-                    //for current day
-                    
+                    //current day
                     var temperature = data.daily[0].temp.max
                     document.querySelector("#temperature").innerHTML = "Temperature: " + temperature + " Kelvin"
                     var gusty = data.daily[0].wind_speed
@@ -72,6 +68,15 @@ var getcoords = function(city) {
                         var temp = document.createElement("p")
                         var wind = document.createElement("p")
                         var humid = document.createElement("p")
+                        var days = document.createElement("h4")
+
+                        // for (let index = 1; index < 6; index++) {
+                        //     const days = array[index];
+                        //     var dayss = moment().format('YYYY-MM-DD')
+                        //     days.innerHTML = dayss
+                        //     card.appendChild(dayss)
+                        // }
+
 
                         temp.innerHTML = "Temperature: " + data.daily[i].temp.max + " Kelvin"
                         card.appendChild(temp)
