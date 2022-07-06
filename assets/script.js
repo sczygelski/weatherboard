@@ -47,7 +47,7 @@ var getcoords = function(city) {
                     var gusty = data.daily[0].wind_speed
                     document.querySelector("#gusty").innerHTML = "Wind: " + gusty + " MPH"
                     var humidity = data.daily[0].humidity;
-                    document.querySelector("#humidity").innerHTML = "Humidity: " + humidity;
+                    document.querySelector("#humidity").innerHTML = "Humidity: " + humidity + " %";
                     var UV = data.daily[0].uvi
                     document.querySelector("#UV").innerHTML = "UV Index: " + UV
 
@@ -62,19 +62,16 @@ var getcoords = function(city) {
                         temp.innerHTML = data.daily[i].temp.max
                         card.appendChild(temp)
 
-                        // icon = data.daily[i].weather[0].icon
-                        // var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-                        // console.log(iconUrl)
-                        // var icons = document.createElement(iconUrl)
-                        // card.appendChild(icons)
+                        icon = data.daily[0].weather[0].icon
+                        var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
 
                         wind.innerHTML = data.daily[i].wind_speed
                         card.appendChild(wind)
                         humid.innerHTML = data.daily[i].humidity
                         card.appendChild(humid)                        
 
+                        card.classList.add("cardclass");
 
-                        // test.innerHTML = "taco"
                         document.querySelector(".row").appendChild(card)
                         
                         

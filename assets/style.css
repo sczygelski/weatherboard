@@ -36,3 +36,7 @@ h3 {
     margin: 5px;
     background-color: rgba(230, 218, 207, 0.5);
 }
+
+.cardclass {
+    border: 2px solid black;
+}
