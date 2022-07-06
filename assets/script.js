@@ -40,9 +40,18 @@ var getcoords = function(city) {
                 console.log(response);
                 response.json().then(function(data) {
                     console.log(data);
+
+                    //for current day
+                    var temperature = data.daily[0].temp.max
+                    document.querySelector("#temperature").innerHTML = "Temperature: " + temperature + " Kelvin"
+                    var gusty = data.daily[0].wind_speed
+                    document.querySelector("#gusty").innerHTML = "Wind: " + gusty + " MPH"
                     var humidity = data.daily[0].humidity;
-                    // console.log(humidity);
-                    document.querySelector("#header").innerHTML = (humidity);
+                    document.querySelector("#humidity").innerHTML = "Humidity: " + humidity;
+                    var UV = data.daily[0].uvi
+                    document.querySelector("#UV").innerHTML = "UV Index: " + UV
+
+                    //for 5 day forecast
                     for (let i = 1; i < 6; i++) {
                         var card = document.createElement("div")
                         var icon = document.createElement("p")
@@ -52,6 +61,13 @@ var getcoords = function(city) {
 
                         temp.innerHTML = data.daily[i].temp.max
                         card.appendChild(temp)
+
+                        // icon = data.daily[i].weather[0].icon
+                        // var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+                        // console.log(iconUrl)
+                        // var icons = document.createElement(iconUrl)
+                        // card.appendChild(icons)
+
                         wind.innerHTML = data.daily[i].wind_speed
                         card.appendChild(wind)
                         humid.innerHTML = data.daily[i].humidity
