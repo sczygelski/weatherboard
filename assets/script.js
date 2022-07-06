@@ -2,8 +2,8 @@
 
 var searchbodyEl = document.querySelector("#searchbody");
 var cityEl = document.querySelector("#city");
-var citytitle = document.querySelector('#citytitle');
-var humidityEl = document.getElementById("humidity");
+
+
 
 
 
@@ -32,8 +32,9 @@ var getcoords = function(city) {
         response.json().then(function(data) {
             var lat =  data[0].lat;
             var lon = data[0].lon;
-            console.log(lat);
-            console.log(lon);
+            var name = document.querySelector("#citytitle")
+            name.innerHTML = data[0].name + ", " + data[0].state;
+            
             
             var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=6c6a2773e4ad1859b9bab1adec8ab957";
             
