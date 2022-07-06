@@ -39,4 +39,20 @@ h3 {
 
 .cardclass {
     border: 2px solid black;
+    align-items: right;
+    padding: 25px;
+    margin: 15px;
+    border-radius: 15px;
+}
+
+.high {
+    background-color: greenyellow;
+}
+
+.med {
+    background-color: yellow;
+}
+
+.low {
+    background-color: red;
 }

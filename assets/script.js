@@ -42,6 +42,7 @@ var getcoords = function(city) {
                     console.log(data);
 
                     //for current day
+
                     var temperature = data.daily[0].temp.max
                     document.querySelector("#temperature").innerHTML = "Temperature: " + temperature + " Kelvin"
                     var gusty = data.daily[0].wind_speed
@@ -50,6 +51,18 @@ var getcoords = function(city) {
                     document.querySelector("#humidity").innerHTML = "Humidity: " + humidity + " %";
                     var UV = data.daily[0].uvi
                     document.querySelector("#UV").innerHTML = "UV Index: " + UV
+                    var UVnum = data.daily[0].uvi.innerHTML
+                    var UVEl = document.querySelector("#UV")
+
+                    if (UVEl >= 6) {
+                        UVElclassList.add("high")
+                    }
+                    else if (UVEl <= 2) {
+                        UVEl.classList.add("low")
+                    }
+                    else {
+                        UVEl.classList.add("med")
+                    }
 
                     //for 5 day forecast
                     for (let i = 1; i < 6; i++) {
@@ -59,15 +72,20 @@ var getcoords = function(city) {
                         var wind = document.createElement("p")
                         var humid = document.createElement("p")
 
-                        temp.innerHTML = data.daily[i].temp.max
+                        temp.innerHTML = "Temperature: " + data.daily[i].temp.max + " Kelvin"
                         card.appendChild(temp)
 
                         icon = data.daily[0].weather[0].icon
                         var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+                        // fetch (iconUrl).then(function(response){
+                        //     card.appendChild(response)
+                        // })
+                        document.querySelector("#iconUrl") == iconUrl
 
-                        wind.innerHTML = data.daily[i].wind_speed
-                        card.appendChild(wind)
-                        humid.innerHTML = data.daily[i].humidity
+
+                        wind.innerHTML = "Wind: " + data.daily[i].wind_speed + " MPH"
+                        card.appendChild(wind) 
+                        humid.innerHTML = "Humidity: " + data.daily[i].humidity + " %"
                         card.appendChild(humid)                        
 
                         card.classList.add("cardclass");
