@@ -23,7 +23,7 @@ var formSubmitHandler = function(event) {
 
 //fetch coordinates
 var getcoords = function(city) {
-    var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ",USA&limit=1&appid=6c6a2773e4ad1859b9bab1adec8ab957";
+    var apiURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + ",USA&limit=1&appid=6c6a2773e4ad1859b9bab1adec8ab957";
     
     
     fetch(apiURL).then(function(response) {
@@ -35,13 +35,25 @@ var getcoords = function(city) {
             name.innerHTML = data[0].name + ", " + data[0].state + ":      " + curdate;
             
             //fetch weather from coordinates
-            var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=6c6a2773e4ad1859b9bab1adec8ab957";           
+            var weatherapiURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=6c6a2773e4ad1859b9bab1adec8ab957";          
             fetch (weatherapiURL).then(function(response) {
                 response.json().then(function(data) {
-
+                    console.log(data)
                     //current day
                     var temperature = data.daily[0].temp.max
                     document.querySelector("#temperature").innerHTML = "Temperature: " + temperature + " Kelvin"
+
+
+
+                    //var pic = document.createElement("img")
+                    var pic = document.getElementById("icon");
+
+                    pic.src  = "https://openweathermap.org/img/w/" + data.daily[0].weather[0].icon + ".png";
+                    console.log(pic)
+
+                    //pics.innerHTML = pic.src
+
+                    
                     var gusty = data.daily[0].wind_speed
                     document.querySelector("#gusty").innerHTML = "Wind: " + gusty + " MPH"
                     var humidity = data.daily[0].humidity;
@@ -64,41 +76,26 @@ var getcoords = function(city) {
                     //for 5 day forecast
                     for (let i = 1; i < 6; i++) {
                         var card = document.createElement("div")
-                        var icon = document.createElement("p")
+                        var icon = document.createElement("img")
                         var temp = document.createElement("p")
                         var wind = document.createElement("p")
                         var humid = document.createElement("p")
                         var days = document.createElement("h4")
-
-                        // for (let index = 1; index < 6; index++) {
-                        //     const days = array[index];
-                        //     var dayss = moment().format('YYYY-MM-DD')
-                        //     days.innerHTML = dayss
-                        //     card.appendChild(dayss)
-                        // }
-
-
+                        //temperature
                         temp.innerHTML = "Temperature: " + data.daily[i].temp.max + " Kelvin"
                         card.appendChild(temp)
-
-                        icon = data.daily[0].weather[0].icon
-                        var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-                        // fetch (iconUrl).then(function(response){
-                        //     card.appendChild(response)
-                        // })
-                        document.querySelector("#iconUrl") == iconUrl
-
-
+                        //icon
+                        var iconsEl = document.querySelector("#iconUrl")
+                        icon.src = "https://openweathermap.org/img/w/" + data.daily[i].weather[0].icon + ".png";
+                        card.appendChild(icon)
+                        //wind
                         wind.innerHTML = "Wind: " + data.daily[i].wind_speed + " MPH"
                         card.appendChild(wind) 
+                        //humidity
                         humid.innerHTML = "Humidity: " + data.daily[i].humidity + " %"
                         card.appendChild(humid)                        
-
                         card.classList.add("cardclass");
-
                         document.querySelector(".row").appendChild(card)
-                        
-                        
                     }
                 })
 

@@ -40,9 +40,10 @@ h3 {
 .cardclass {
     border: 2px solid black;
     align-items: right;
-    padding: 25px;
-    margin: 15px;
+    padding: 10px;
+    margin: 10px;
     border-radius: 15px;
+    font-size: 12px;
 }
 
 .high {
