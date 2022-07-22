@@ -2,5 +2,6 @@ This weatherboard will display the weather for today and 5 days out in any US ci
 
 Deployment: https://sczygelski.github.io/weatherboard/
 
-![alt text](assets/Screenshot weather)
+![alt text](assets/Screenshot weather.pdf)
+
 
